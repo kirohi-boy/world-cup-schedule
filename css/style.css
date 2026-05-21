@@ -1,0 +1,460 @@
+:root {
+  --bg-primary: #0a1628;
+  --bg-card: #111f35;
+  --bg-card-hover: #162944;
+  --gold: #D4AF37;
+  --gold-light: #F5D060;
+  --teal: #00C8FF;
+  --red: #E8001C;
+  --white: #FFFFFF;
+  --gray-light: #8ba3c0;
+  --gray-mid: #3d5a7a;
+  --border: #1e3a5f;
+
+  --stage-group: #1a6b3a;
+  --stage-r32: #1a4a7a;
+  --stage-r16: #2a3a8a;
+  --stage-qf: #5a1a8a;
+  --stage-sf: #8a1a5a;
+  --stage-third: #3a5a1a;
+  --stage-final: #8a4a00;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--white);
+  font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ── Header ── */
+.header {
+  background: linear-gradient(135deg, #0a1628 0%, #0d2445 40%, #1a0a2e 100%);
+  border-bottom: 2px solid var(--gold);
+  padding: 20px 16px 12px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 0%, rgba(212,175,55,0.12) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+}
+
+.header-trophy {
+  font-size: 2.4rem;
+  filter: drop-shadow(0 0 12px rgba(212,175,55,0.8));
+  animation: glow 2.5s ease-in-out infinite alternate;
+}
+
+.header-ball {
+  font-size: 1.8rem;
+  animation: spin 8s linear infinite;
+}
+
+@keyframes glow {
+  from { filter: drop-shadow(0 0 8px rgba(212,175,55,0.6)); }
+  to   { filter: drop-shadow(0 0 20px rgba(212,175,55,1)); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.header-title {
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), #b8860b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.04em;
+}
+
+.header-sub {
+  font-size: 0.75rem;
+  color: var(--teal);
+  letter-spacing: 0.08em;
+  margin-top: 2px;
+}
+
+.header-flags {
+  margin-top: 8px;
+  font-size: 0.8rem;
+  color: var(--gray-light);
+  letter-spacing: 0.04em;
+  position: relative;
+}
+
+/* ── Main ── */
+.main {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+/* ── Date Navigation ── */
+.date-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.nav-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--gold);
+  font-size: 2rem;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+  flex-shrink: 0;
+}
+
+.nav-btn:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--gold);
+}
+
+.nav-btn:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.date-display {
+  flex: 1;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.date-picker {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--white);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color 0.2s;
+}
+
+.date-picker:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+
+.date-picker::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+}
+
+.date-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--gold);
+  text-align: center;
+  min-height: 1.5em;
+}
+
+/* ── Tournament Period ── */
+.tournament-period {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.period-text {
+  font-size: 0.75rem;
+  color: var(--gray-light);
+}
+
+/* ── Stage Summary ── */
+.stage-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  justify-content: center;
+  min-height: 28px;
+}
+
+.stage-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.04em;
+}
+
+/* ── Match Cards ── */
+.matches-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.match-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  transition: transform 0.15s, border-color 0.15s, background 0.15s;
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.match-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  border-radius: 12px 0 0 12px;
+}
+
+.match-card:hover {
+  transform: translateY(-2px);
+  background: var(--bg-card-hover);
+  border-color: var(--gray-mid);
+}
+
+/* Stage color bars */
+.match-card[data-stage="グループステージ"]::before { background: var(--stage-group); }
+.match-card[data-stage="ラウンド32"]::before      { background: var(--stage-r32); }
+.match-card[data-stage="ラウンド16"]::before      { background: var(--stage-r16); }
+.match-card[data-stage="準々決勝"]::before         { background: var(--stage-qf); }
+.match-card[data-stage="準決勝"]::before           { background: var(--stage-sf); }
+.match-card[data-stage="3位決定戦"]::before        { background: var(--stage-third); }
+.match-card[data-stage="決勝"]::before             { background: var(--gold); }
+
+.match-card[data-stage="決勝"] {
+  border-color: var(--gold);
+  background: linear-gradient(135deg, #1a1200 0%, var(--bg-card) 50%);
+}
+
+.match-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.match-time {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gold);
+  min-width: 60px;
+  font-variant-numeric: tabular-nums;
+}
+
+.match-time span {
+  font-size: 0.7rem;
+  color: var(--gray-light);
+  font-weight: 400;
+  display: block;
+  line-height: 1;
+}
+
+.match-stage-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+  margin-left: auto;
+}
+
+.badge-グループステージ { background: var(--stage-group); color: #a8ffca; }
+.badge-ラウンド32      { background: var(--stage-r32); color: #a8d8ff; }
+.badge-ラウンド16      { background: var(--stage-r16); color: #c0c8ff; }
+.badge-準々決勝         { background: var(--stage-qf); color: #e0a8ff; }
+.badge-準決勝           { background: var(--stage-sf); color: #ffa8d8; }
+.badge-3位決定戦        { background: var(--stage-third); color: #d8ffa8; }
+.badge-決勝             { background: var(--gold); color: #1a0a00; }
+
+.match-group-label {
+  font-size: 0.7rem;
+  color: var(--teal);
+  font-weight: 700;
+  padding: 2px 6px;
+  border: 1px solid var(--teal);
+  border-radius: 4px;
+}
+
+.match-teams {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.team {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.team-flag {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.team-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--white);
+}
+
+.vs-separator {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--gray-mid);
+  flex-shrink: 0;
+  padding: 0 4px;
+}
+
+.match-footer {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.match-venue {
+  font-size: 0.72rem;
+  color: var(--gray-light);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.match-venue::before {
+  content: '📍';
+  font-size: 0.7rem;
+}
+
+.match-notable {
+  font-size: 0.7rem;
+  color: #FFD700;
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.match-notable::before {
+  content: '⭐';
+  font-size: 0.65rem;
+}
+
+/* ── No Matches ── */
+.no-matches {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.no-matches.hidden {
+  display: none;
+}
+
+.no-matches-icon {
+  font-size: 3rem;
+  margin-bottom: 12px;
+}
+
+.no-matches-text {
+  font-size: 1.1rem;
+  color: var(--gray-light);
+  margin-bottom: 8px;
+}
+
+.no-matches-sub {
+  font-size: 0.85rem;
+  color: var(--gray-mid);
+}
+
+/* ── Footer ── */
+.footer {
+  background: #060e1a;
+  border-top: 1px solid var(--border);
+  padding: 16px;
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--gray-mid);
+  line-height: 1.8;
+}
+
+/* ── Responsive ── */
+@media (min-width: 600px) {
+  .matches-grid {
+    gap: 14px;
+  }
+
+  .match-card {
+    padding: 18px 20px;
+  }
+
+  .match-time {
+    font-size: 1.4rem;
+    min-width: 70px;
+  }
+
+  .team-flag {
+    font-size: 2.4rem;
+  }
+
+  .team-name {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .matches-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .match-card[data-stage="準決勝"],
+  .match-card[data-stage="決勝"],
+  .match-card[data-stage="3位決定戦"] {
+    grid-column: 1 / -1;
+  }
+}

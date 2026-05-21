@@ -58,6 +58,10 @@ npx serve .
 ]
 ```
 
+## GitHubリポジトリ
+
+https://github.com/kirohi-boy/world-cup-schedule
+
 ## 注意事項
 
 - 試合時刻はJST（日本標準時）で統一する
