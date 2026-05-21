@@ -1,33 +1,31 @@
 const FLAGS = {
-  "アメリカ": "🇺🇸", "メキシコ": "🇲🇽", "カナダ": "🇨🇦",
-  "パナマ": "🇵🇦", "ウルグアイ": "🇺🇾", "ボリビア": "🇧🇴",
-  "エクアドル": "🇪🇨", "ジャマイカ": "🇯🇲", "ベネズエラ": "🇻🇪",
-  "クロアチア": "🇭🇷", "モロッコ": "🇲🇦", "ホンジュラス": "🇭🇳",
-  "アルゼンチン": "🇦🇷", "チリ": "🇨🇱", "ペルー": "🇵🇪", "アルバニア": "🇦🇱",
-  "スペイン": "🇪🇸", "セルビア": "🇷🇸", "韓国": "🇰🇷", "ニュージーランド": "🇳🇿",
-  "ドイツ": "🇩🇪", "オーストリア": "🇦🇹", "日本": "🇯🇵", "カメルーン": "🇨🇲",
-  "フランス": "🇫🇷", "ベルギー": "🇧🇪", "サウジアラビア": "🇸🇦", "ジョージア": "🇬🇪",
-  "イングランド": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "ポーランド": "🇵🇱", "セネガル": "🇸🇳", "チュニジア": "🇹🇳",
-  "ブラジル": "🇧🇷", "コロンビア": "🇨🇴", "ナイジェリア": "🇳🇬", "コスタリカ": "🇨🇷",
-  "イタリア": "🇮🇹", "トルコ": "🇹🇷", "南アフリカ": "🇿🇦", "パラグアイ": "🇵🇾",
-  "ポルトガル": "🇵🇹", "デンマーク": "🇩🇰", "エジプト": "🇪🇬", "ウズベキスタン": "🇺🇿",
-  "オランダ": "🇳🇱", "ウクライナ": "🇺🇦", "ガーナ": "🇬🇭", "ルーマニア": "🇷🇴"
+  "メキシコ": "🇲🇽", "南アフリカ": "🇿🇦", "韓国": "🇰🇷", "チェコ": "🇨🇿",
+  "カナダ": "🇨🇦", "ボスニア・ヘルツェゴビナ": "🇧🇦", "カタール": "🇶🇦", "スイス": "🇨🇭",
+  "ブラジル": "🇧🇷", "モロッコ": "🇲🇦", "ハイチ": "🇭🇹", "スコットランド": "🏴󠁧󠁢󠁳󠁣󠁴󠁿",
+  "アメリカ": "🇺🇸", "パラグアイ": "🇵🇾", "オーストラリア": "🇦🇺", "トルコ": "🇹🇷",
+  "ドイツ": "🇩🇪", "キュラソー": "🇨🇼", "コートジボワール": "🇨🇮", "エクアドル": "🇪🇨",
+  "オランダ": "🇳🇱", "日本": "🇯🇵", "スウェーデン": "🇸🇪", "チュニジア": "🇹🇳",
+  "ベルギー": "🇧🇪", "エジプト": "🇪🇬", "イラン": "🇮🇷", "ニュージーランド": "🇳🇿",
+  "スペイン": "🇪🇸", "カーボベルデ": "🇨🇻", "サウジアラビア": "🇸🇦", "ウルグアイ": "🇺🇾",
+  "フランス": "🇫🇷", "セネガル": "🇸🇳", "イラク": "🇮🇶", "ノルウェー": "🇳🇴",
+  "アルゼンチン": "🇦🇷", "アルジェリア": "🇩🇿", "オーストリア": "🇦🇹", "ヨルダン": "🇯🇴",
+  "ポルトガル": "🇵🇹", "コンゴ民主共和国": "🇨🇩", "ウズベキスタン": "🇺🇿", "コロンビア": "🇨🇴",
+  "イングランド": "🏴󠁧󠁢󠁥󠁮󠁧󠁿", "クロアチア": "🇭🇷", "ガーナ": "🇬🇭", "パナマ": "🇵🇦"
 };
 
 const NOTABLE_PLAYERS = {
-  "アメリカ": "C・プリシッチ", "メキシコ": "S・ヒメネス", "カナダ": "A・デイヴィス",
-  "パナマ": "A・ムリージョ", "ウルグアイ": "F・バルベルデ", "ボリビア": "M・モレノ",
-  "エクアドル": "E・バレンシア", "ジャマイカ": "L・ベイリー", "ベネズエラ": "Y・リナレス",
-  "クロアチア": "L・モドリッチ", "モロッコ": "A・ハキミ", "ホンジュラス": "R・ベルンタル",
-  "アルゼンチン": "L・メッシ", "チリ": "A・サンチェス", "ペルー": "P・ゲレロ", "アルバニア": "B・ミラ",
-  "スペイン": "L・ヤマル", "セルビア": "D・ブラホビッチ", "韓国": "ソン・フンミン", "ニュージーランド": "C・ウッド",
-  "ドイツ": "J・ムシアラ", "オーストリア": "M・ザビツァー", "日本": "久保建英", "カメルーン": "A・オヌアナ",
-  "フランス": "K・ムバッペ", "ベルギー": "K・デ・ブライネ", "サウジアラビア": "S・アル＝シェフリ", "ジョージア": "K・クバラツヘリア",
-  "イングランド": "J・ベリンガム", "ポーランド": "R・レヴァンドフスキ", "セネガル": "I・サル", "チュニジア": "W・ハズリ",
-  "ブラジル": "ヴィニシウス Jr.", "コロンビア": "L・ディアス", "ナイジェリア": "V・オシムヘン", "コスタリカ": "K・ナバス",
-  "イタリア": "F・キエーザ", "トルコ": "A・ギュレル", "南アフリカ": "P・タウ", "パラグアイ": "M・アルミロン",
-  "ポルトガル": "B・フェルナンデス", "デンマーク": "C・エリクセン", "エジプト": "M・サラー", "ウズベキスタン": "S・ショムロドフ",
-  "オランダ": "V・ファン・ダイク", "ウクライナ": "V・ツィガンコフ", "ガーナ": "M・クドゥス", "ルーマニア": "I・ハジ"
+  "メキシコ": "S・ヒメネス", "南アフリカ": "P・タウ", "韓国": "ソン・フンミン", "チェコ": "P・シック",
+  "カナダ": "A・デイヴィス", "ボスニア・ヘルツェゴビナ": "E・ジェコ", "カタール": "A・アフィフ", "スイス": "G・ジャカ",
+  "ブラジル": "ヴィニシウス Jr.", "モロッコ": "A・ハキミ", "ハイチ": "K・ラヴェレ", "スコットランド": "A・ロバートソン",
+  "アメリカ": "C・プリシッチ", "パラグアイ": "M・アルミロン", "オーストラリア": "M・ライアン", "トルコ": "A・ギュレル",
+  "ドイツ": "J・ムシアラ", "キュラソー": "L・バクナ", "コートジボワール": "F・ケシエ", "エクアドル": "E・バレンシア",
+  "オランダ": "V・ファン・ダイク", "日本": "久保建英", "スウェーデン": "A・イサク", "チュニジア": "E・スキリ",
+  "ベルギー": "K・デ・ブライネ", "エジプト": "M・サラー", "イラン": "M・タレミ", "ニュージーランド": "C・ウッド",
+  "スペイン": "L・ヤマル", "カーボベルデ": "G・ロドリゲス", "サウジアラビア": "S・アル・シェフリ", "ウルグアイ": "F・バルベルデ",
+  "フランス": "K・ムバッペ", "セネガル": "I・サル", "イラク": "A・フセイン", "ノルウェー": "E・ハーランド",
+  "アルゼンチン": "L・メッシ", "アルジェリア": "Y・アタル", "オーストリア": "M・ザビツァー", "ヨルダン": "Y・アル・ナイマット",
+  "ポルトガル": "B・フェルナンデス", "コンゴ民主共和国": "C・ンベンバ", "ウズベキスタン": "E・ショムロドフ", "コロンビア": "L・ディアス",
+  "イングランド": "J・ベリンガム", "クロアチア": "L・モドリッチ", "ガーナ": "M・クドゥス", "パナマ": "A・カラスキージャ"
 };
 
 const TOURNAMENT_START = "2026-06-12";
@@ -66,21 +64,13 @@ function daysUntil(targetDateStr) {
   return Math.round((target - today) / 86400000);
 }
 
-function getFlag(teamName) {
-  return FLAGS[teamName] || "🏳";
-}
-
-function getNotable(teamName) {
-  return NOTABLE_PLAYERS[teamName] || null;
-}
-
 function renderMatches(dateStr) {
   currentDate = dateStr;
-  const picker = document.getElementById("datePicker");
-  const label  = document.getElementById("dateLabel");
-  const grid   = document.getElementById("matchesGrid");
-  const noMatch = document.getElementById("noMatches");
-  const noSub   = document.getElementById("noMatchesSub");
+  const picker   = document.getElementById("datePicker");
+  const label    = document.getElementById("dateLabel");
+  const grid     = document.getElementById("matchesGrid");
+  const noMatch  = document.getElementById("noMatches");
+  const noSub    = document.getElementById("noMatchesSub");
   const stageSummary = document.getElementById("stageSummary");
 
   picker.value = dateStr;
@@ -102,7 +92,7 @@ function renderMatches(dateStr) {
 
     const diff = daysUntil(TOURNAMENT_START);
     if (dateStr < TOURNAMENT_START && diff > 0) {
-      noSub.textContent = `開幕まであと ${diff} 日！（2026年6月11日 現地時間）`;
+      noSub.textContent = `開幕まであと ${diff} 日！（現地時間 2026年6月11日開幕）`;
     } else if (dateStr > TOURNAMENT_END) {
       noSub.textContent = "大会はすでに終了しています";
     } else {
@@ -119,7 +109,7 @@ function renderMatches(dateStr) {
   stages.forEach(stage => {
     const badge = document.createElement("span");
     badge.className = `stage-badge badge-${stage}`;
-    badge.textContent = stage;
+    badge.textContent = `${stage}${stage === "グループステージ" ? ` — ${matches.filter(m => m.stage === stage).length}試合` : ""}`;
     stageSummary.appendChild(badge);
   });
 
@@ -128,11 +118,10 @@ function renderMatches(dateStr) {
     card.className = "match-card";
     card.dataset.stage = match.stage;
 
-    const homeFlag   = getFlag(match.home);
-    const awayFlag   = getFlag(match.away);
-    const notable1   = getNotable(match.home);
-    const notable2   = getNotable(match.away);
-    const notableStr = [notable1, notable2].filter(Boolean).join(" / ");
+    const homeFlag    = FLAGS[match.home] || "🏳";
+    const awayFlag    = FLAGS[match.away] || "🏳";
+    const homeNotable = NOTABLE_PLAYERS[match.home] || "";
+    const awayNotable = NOTABLE_PLAYERS[match.away] || "";
 
     const groupLabel = match.group
       ? `<span class="match-group-label">Group ${match.group} MD${match.matchday}</span>`
@@ -151,16 +140,17 @@ function renderMatches(dateStr) {
         <div class="team">
           <span class="team-flag">${homeFlag}</span>
           <span class="team-name">${match.home}</span>
+          ${homeNotable ? `<span class="team-notable">⭐ ${homeNotable}</span>` : ""}
         </div>
         <span class="vs-separator">VS</span>
         <div class="team">
           <span class="team-flag">${awayFlag}</span>
           <span class="team-name">${match.away}</span>
+          ${awayNotable ? `<span class="team-notable">⭐ ${awayNotable}</span>` : ""}
         </div>
       </div>
       <div class="match-footer">
         <span class="match-venue">${match.venue}（${match.city}）</span>
-        ${notableStr ? `<span class="match-notable">${notableStr}</span>` : ""}
       </div>
     `;
 
@@ -192,8 +182,7 @@ async function init() {
     return;
   }
 
-  const initial = getInitialDate();
-  renderMatches(initial);
+  renderMatches(getInitialDate());
 
   document.getElementById("prevBtn").addEventListener("click", () => navigateDate(-1));
   document.getElementById("nextBtn").addEventListener("click", () => navigateDate(1));

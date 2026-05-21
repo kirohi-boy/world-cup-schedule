@@ -342,6 +342,13 @@ body {
   color: var(--white);
 }
 
+.team-notable {
+  font-size: 0.68rem;
+  color: #FFD700;
+  text-align: center;
+  line-height: 1.3;
+}
+
 .vs-separator {
   font-size: 1rem;
   font-weight: 800;
@@ -446,15 +453,7 @@ body {
 }
 
 @media (min-width: 768px) {
-  .matches-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  .match-card[data-stage="準決勝"],
-  .match-card[data-stage="決勝"],
-  .match-card[data-stage="3位決定戦"] {
-    grid-column: 1 / -1;
+  .match-card {
+    padding: 18px 24px;
   }
 }
