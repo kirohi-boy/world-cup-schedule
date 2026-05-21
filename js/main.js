@@ -28,6 +28,21 @@ const NOTABLE_PLAYERS = {
   "イングランド": "ジュード・ベリンガム", "クロアチア": "ルカ・モドリッチ", "ガーナ": "モハメッド・クドゥス", "パナマ": "アダルベルト・カラスキージャ"
 };
 
+const CLUBS = {
+  "メキシコ": "フェイエノールト", "南アフリカ": "アル・アハリ", "韓国": "トッテナム・ホットスパー", "チェコ": "バイヤー・レバークーゼン",
+  "カナダ": "バイエルン・ミュンヘン", "ボスニア・ヘルツェゴビナ": "フェネルバフチェ", "カタール": "アル・サッド", "スイス": "バイヤー・レバークーゼン",
+  "ブラジル": "レアル・マドリード", "モロッコ": "パリ・サンジェルマン", "ハイチ": "CAプログレ", "スコットランド": "リバプール",
+  "アメリカ": "ACミラン", "パラグアイ": "ニューカッスル", "オーストラリア": "FCコペンハーゲン", "トルコ": "レアル・マドリード",
+  "ドイツ": "バイエルン・ミュンヘン", "キュラソー": "ミドルズブラ", "コートジボワール": "アル・アハリ（サウジ）", "エクアドル": "LDUキト",
+  "オランダ": "リバプール", "日本": "レアル・ソシエダ", "スウェーデン": "ニューカッスル", "チュニジア": "アイントラハト・フランクフルト",
+  "ベルギー": "マンチェスター・シティ", "エジプト": "リバプール", "イラン": "インテル・ミラノ", "ニュージーランド": "ノッティンガム・フォレスト",
+  "スペイン": "バルセロナ", "カーボベルデ": "ヘタフェ", "サウジアラビア": "アル・ヒラール", "ウルグアイ": "レアル・マドリード",
+  "フランス": "レアル・マドリード", "セネガル": "マルセイユ", "イラク": "アル・ショルタ", "ノルウェー": "マンチェスター・シティ",
+  "アルゼンチン": "インテル・マイアミ", "アルジェリア": "OGCニース", "オーストリア": "VfBシュトゥットガルト", "ヨルダン": "アル・ウェフダート",
+  "ポルトガル": "マンチェスター・ユナイテッド", "コンゴ民主共和国": "マルセイユ", "ウズベキスタン": "ジェノア", "コロンビア": "リバプール",
+  "イングランド": "レアル・マドリード", "クロアチア": "レアル・マドリード", "ガーナ": "ウェストハム", "パナマ": "DCユナイテッド"
+};
+
 const CITY_COUNTRY = {
   "メキシコシティ": "メキシコ", "グアダラハラ": "メキシコ", "モンテレイ": "メキシコ",
   "トロント": "カナダ", "バンクーバー": "カナダ",
@@ -131,6 +146,8 @@ function renderMatches(dateStr) {
     const awayFlag    = FLAGS[match.away] || "🏳";
     const homeNotable = NOTABLE_PLAYERS[match.home] || "";
     const awayNotable = NOTABLE_PLAYERS[match.away] || "";
+    const homeClub    = CLUBS[match.home] || "";
+    const awayClub    = CLUBS[match.away] || "";
 
     const groupLabel = match.group
       ? `<span class="match-group-label">Group ${match.group} MD${match.matchday}</span>`
@@ -139,7 +156,7 @@ function renderMatches(dateStr) {
     card.innerHTML = `
       <div class="match-header">
         <div class="match-time">
-          ${match.time}
+          ${match.time} <span class="kickoff-label">Kick Off</span>
           <span>JST</span>
         </div>
         ${groupLabel}
@@ -149,13 +166,13 @@ function renderMatches(dateStr) {
         <div class="team">
           <span class="team-flag">${homeFlag}</span>
           <span class="team-name">${match.home}</span>
-          ${homeNotable ? `<span class="team-notable">注目選手：${homeNotable}</span>` : ""}
+          ${homeNotable ? `<span class="team-notable">注目選手：${homeNotable}${homeClub ? `（${homeClub}）` : ""}</span>` : ""}
         </div>
         <span class="vs-separator">VS</span>
         <div class="team">
           <span class="team-flag">${awayFlag}</span>
           <span class="team-name">${match.away}</span>
-          ${awayNotable ? `<span class="team-notable">注目選手：${awayNotable}</span>` : ""}
+          ${awayNotable ? `<span class="team-notable">注目選手：${awayNotable}${awayClub ? `（${awayClub}）` : ""}</span>` : ""}
         </div>
       </div>
       <div class="match-footer">

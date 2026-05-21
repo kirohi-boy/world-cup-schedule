@@ -288,6 +288,14 @@ body {
   line-height: 1;
 }
 
+.kickoff-label {
+  display: inline;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--teal);
+  letter-spacing: 0.04em;
+}
+
 .match-stage-badge {
   font-size: 0.7rem;
   font-weight: 700;
@@ -331,12 +339,12 @@ body {
 }
 
 .team-flag {
-  font-size: 2rem;
+  font-size: 4rem;
   line-height: 1;
 }
 
 .team-name {
-  font-size: 0.9rem;
+  font-size: 1.8rem;
   font-weight: 700;
   text-align: center;
   color: var(--white);
