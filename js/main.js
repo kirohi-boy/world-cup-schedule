@@ -28,6 +28,15 @@ const NOTABLE_PLAYERS = {
   "イングランド": "J・ベリンガム", "クロアチア": "L・モドリッチ", "ガーナ": "M・クドゥス", "パナマ": "A・カラスキージャ"
 };
 
+const CITY_COUNTRY = {
+  "メキシコシティ": "メキシコ", "グアダラハラ": "メキシコ", "モンテレイ": "メキシコ",
+  "トロント": "カナダ", "バンクーバー": "カナダ",
+  "イーストラザフォード": "アメリカ", "アトランタ": "アメリカ", "ロサンゼルス": "アメリカ",
+  "サンタクララ": "アメリカ", "フォックスボロ": "アメリカ", "フィラデルフィア": "アメリカ",
+  "シアトル": "アメリカ", "ヒューストン": "アメリカ", "マイアミ": "アメリカ",
+  "アーリントン": "アメリカ", "カンザスシティ": "アメリカ"
+};
+
 const TOURNAMENT_START = "2026-06-12";
 const TOURNAMENT_END   = "2026-07-20";
 const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
@@ -150,7 +159,7 @@ function renderMatches(dateStr) {
         </div>
       </div>
       <div class="match-footer">
-        <span class="match-venue">${match.venue}（${match.city}）</span>
+        <span class="match-venue">${match.venue}（${CITY_COUNTRY[match.city] ?? ""} ${match.city}）</span>
       </div>
     `;
 
