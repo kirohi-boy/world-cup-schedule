@@ -39,24 +39,33 @@
   </header>
 
   <main class="main">
-    <section class="date-nav">
-      <button class="nav-btn" id="prevBtn" aria-label="前の日">&#8249;</button>
-      <div class="date-display">
-        <input type="date" id="datePicker" class="date-picker"
-          min="2026-06-12" max="2026-07-20">
-        <div class="date-label" id="dateLabel"></div>
-      </div>
-      <button class="nav-btn" id="nextBtn" aria-label="次の日">&#8250;</button>
-    </section>
+    <div class="view-toggle">
+      <button class="toggle-btn toggle-btn--active" id="calBtn">📅 カレンダー</button>
+      <button class="toggle-btn" id="dayBtn">📋 日別</button>
+    </div>
 
-    <section class="matches-section">
-      <div class="stage-summary" id="stageSummary"></div>
-      <div class="matches-grid" id="matchesGrid"></div>
-      <div class="no-matches hidden" id="noMatches">
-        <div class="no-matches-icon">📅</div>
-        <p class="no-matches-text">この日は試合がありません</p>
-        <p class="no-matches-sub" id="noMatchesSub"></p>
-      </div>
+    <section id="calendarView"></section>
+
+    <section id="dayView" class="hidden">
+      <section class="date-nav">
+        <button class="nav-btn" id="prevBtn" aria-label="前の日">&#8249;</button>
+        <div class="date-display">
+          <input type="date" id="datePicker" class="date-picker"
+            min="2026-06-12" max="2026-07-20">
+          <div class="date-label" id="dateLabel"></div>
+        </div>
+        <button class="nav-btn" id="nextBtn" aria-label="次の日">&#8250;</button>
+      </section>
+
+      <section class="matches-section">
+        <div class="stage-summary" id="stageSummary"></div>
+        <div class="matches-grid" id="matchesGrid"></div>
+        <div class="no-matches hidden" id="noMatches">
+          <div class="no-matches-icon">📅</div>
+          <p class="no-matches-text">この日は試合がありません</p>
+          <p class="no-matches-sub" id="noMatchesSub"></p>
+        </div>
+      </section>
     </section>
   </main>
 

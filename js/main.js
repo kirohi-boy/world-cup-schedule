@@ -67,6 +67,16 @@ const CITY_COUNTRY = {
   "アーリントン": "アメリカ", "カンザスシティ": "アメリカ"
 };
 
+const STAGE_CLASS = {
+  "グループステージ": "s-group",
+  "ラウンド32":      "s-r32",
+  "ラウンド16":      "s-r16",
+  "準々決勝":        "s-qf",
+  "準決勝":          "s-sf",
+  "3位決定戦":       "s-third",
+  "決勝":            "s-final",
+};
+
 const TOURNAMENT_START = "2026-06-12";
 const TOURNAMENT_END   = "2026-07-20";
 const WEEKDAYS = ["日", "月", "火", "水", "木", "金", "土"];
@@ -203,6 +213,94 @@ function renderMatches(dateStr) {
   });
 }
 
+function renderCalendar() {
+  const container = document.getElementById("calendarView");
+  const MONTHS = [
+    { year: 2026, month: 5, label: "2026年 6月" },
+    { year: 2026, month: 6, label: "2026年 7月" },
+  ];
+
+  const groups = ["A","B","C","D","E","F","G","H","I","J","K","L"];
+  const legend = `<div class="cal-legend">
+    ${groups.map(g => `<span class="cal-legend-item g-${g}">Group ${g}</span>`).join("")}
+    <span class="cal-legend-item s-r32">R32</span>
+    <span class="cal-legend-item s-r16">R16</span>
+    <span class="cal-legend-item s-qf">QF</span>
+    <span class="cal-legend-item s-sf">SF</span>
+    <span class="cal-legend-item s-final">Final</span>
+  </div>`;
+  container.innerHTML = legend;
+
+  const monthsEl = document.createElement("div");
+  container.appendChild(monthsEl);
+  monthsEl.innerHTML = MONTHS.map(({ year, month, label }) => {
+    const firstDow = new Date(year, month, 1).getDay();
+    const lastDate = new Date(year, month + 1, 0).getDate();
+
+    const headers = ["日", "月", "火", "水", "木", "金", "土"].map((d, i) =>
+      `<div class="cal-head${i === 0 ? " cal-head--sun" : i === 6 ? " cal-head--sat" : ""}">${d}</div>`
+    ).join("");
+
+    const emptyCells = Array(firstDow).fill('<div class="cal-cell cal-cell--empty"></div>').join("");
+
+    const dayCells = Array.from({ length: lastDate }, (_, i) => {
+      const d = i + 1;
+      const dow = (firstDow + i) % 7;
+      const mm = String(month + 1).padStart(2, "0");
+      const dd = String(d).padStart(2, "0");
+      const dateStr = `${year}-${mm}-${dd}`;
+      const inTournament = dateStr >= TOURNAMENT_START && dateStr <= TOURNAMENT_END;
+      const dayMatches = allMatches
+        .filter(m => m.date === dateStr)
+        .sort((a, b) => a.time.localeCompare(b.time));
+
+      const dateNumClass = `cal-date${dow === 0 ? " cal-date--sun" : dow === 6 ? " cal-date--sat" : ""}`;
+      const cellClass = `cal-cell${!inTournament ? " cal-cell--inactive" : dayMatches.length > 0 ? " cal-cell--match" : " cal-cell--active"}`;
+
+      const knockoutStage = dayMatches.length > 0 && !dayMatches[0].group ? dayMatches[0].stage : null;
+      const stageLabelHtml = knockoutStage
+        ? `<span class="cal-stage-label ${STAGE_CLASS[knockoutStage]}">${knockoutStage}</span>`
+        : "";
+
+      const matchesHtml = dayMatches.map(m =>
+        `<div class="cal-match ${m.group ? `g-${m.group}` : STAGE_CLASS[m.stage] || "s-group"}">
+          <span class="cal-time">${m.time}</span>
+          <span class="cal-teams">${m.home} vs ${m.away}</span>
+        </div>`
+      ).join("");
+
+      return `<div class="${cellClass}" data-date="${inTournament && dayMatches.length > 0 ? dateStr : ""}">
+        <div class="cal-date-row">
+          <span class="${dateNumClass}">${d}</span>
+          ${stageLabelHtml}
+        </div>
+        ${matchesHtml}
+      </div>`;
+    }).join("");
+
+    return `<div class="cal-month">
+      <h2 class="cal-month-title">${label}</h2>
+      <div class="cal-grid">${headers}${emptyCells}${dayCells}</div>
+    </div>`;
+  }).join("");
+
+  container.addEventListener("click", e => {
+    const cell = e.target.closest("[data-date]");
+    if (cell && cell.dataset.date) {
+      switchView("day");
+      renderMatches(cell.dataset.date);
+    }
+  });
+}
+
+function switchView(view) {
+  const isCalendar = view === "calendar";
+  document.getElementById("calendarView").classList.toggle("hidden", !isCalendar);
+  document.getElementById("dayView").classList.toggle("hidden", isCalendar);
+  document.getElementById("calBtn").classList.toggle("toggle-btn--active", isCalendar);
+  document.getElementById("dayBtn").classList.toggle("toggle-btn--active", !isCalendar);
+}
+
 function findNearestMatchDate(fromDate, direction) {
   const dates = [...new Set(allMatches.map(m => m.date))].sort();
   if (direction > 0) return dates.find(d => d > fromDate) || null;
@@ -227,8 +325,11 @@ async function init() {
     return;
   }
 
+  renderCalendar();
   renderMatches(getInitialDate());
 
+  document.getElementById("calBtn").addEventListener("click", () => switchView("calendar"));
+  document.getElementById("dayBtn").addEventListener("click", () => switchView("day"));
   document.getElementById("prevBtn").addEventListener("click", () => navigateDate(-1));
   document.getElementById("nextBtn").addEventListener("click", () => navigateDate(1));
   document.getElementById("datePicker").addEventListener("change", e => {
