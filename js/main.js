@@ -228,7 +228,8 @@ function renderCalendar() {
     <span class="cal-legend-item s-qf">QF</span>
     <span class="cal-legend-item s-sf">SF</span>
     <span class="cal-legend-item s-final">Final</span>
-  </div>`;
+  </div>
+  <p class="cal-scroll-hint">← 横にスクロールできます →</p>`;
   container.innerHTML = legend;
 
   const monthsEl = document.createElement("div");
