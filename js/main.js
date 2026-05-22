@@ -266,7 +266,7 @@ function renderCalendar() {
       const matchesHtml = dayMatches.map(m =>
         `<div class="cal-match ${m.group ? `g-${m.group}` : STAGE_CLASS[m.stage] || "s-group"}">
           <span class="cal-time">${m.time}</span>
-          <span class="cal-teams">${m.home} vs ${m.away}</span>
+          <span class="cal-teams">${m.home} vs ${m.away}${m.group ? ` (${m.group})` : ""}</span>
         </div>`
       ).join("");
 

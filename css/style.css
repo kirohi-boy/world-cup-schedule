@@ -492,6 +492,18 @@ body {
   margin-bottom: 10px;
 }
 
+/* ── Calendar Container ── */
+#calendarView {
+  max-height: 660px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  background: var(--card);
+  box-shadow: var(--shadow-sm);
+}
+
 /* ── Calendar ── */
 .cal-month {
   margin-bottom: 32px;
@@ -661,7 +673,7 @@ body {
   .cal-legend-item { font-size: 0.55rem; padding: 2px 5px; }
 
   /* Calendar — mobile: horizontal scroll */
-  #calendarView { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  #calendarView { overflow-x: auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 10px; }
   .cal-month { min-width: 560px; }
   .cal-month-title { font-size: 0.95rem; }
   .cal-grid { gap: 2px; }
