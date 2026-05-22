@@ -216,8 +216,8 @@ function renderMatches(dateStr) {
 function renderCalendar() {
   const container = document.getElementById("calendarView");
   const MONTHS = [
-    { year: 2026, month: 5, label: "2026年 6月" },
-    { year: 2026, month: 6, label: "2026年 7月" },
+    { year: 2026, month: 5, label: "2026年 6月", startDay: 8,  endDay: 30 },
+    { year: 2026, month: 6, label: "2026年 7月", startDay: 1,  endDay: 26 },
   ];
 
   const groups = ["A","B","C","D","E","F","G","H","I","J","K","L"];
@@ -234,9 +234,8 @@ function renderCalendar() {
 
   const monthsEl = document.createElement("div");
   container.appendChild(monthsEl);
-  monthsEl.innerHTML = MONTHS.map(({ year, month, label }) => {
-    const firstDow = (new Date(year, month, 1).getDay() + 6) % 7;
-    const lastDate = new Date(year, month + 1, 0).getDate();
+  monthsEl.innerHTML = MONTHS.map(({ year, month, label, startDay, endDay }) => {
+    const firstDow = (new Date(year, month, startDay).getDay() + 6) % 7;
 
     const headers = ["月", "火", "水", "木", "金", "土", "日"].map((d, i) =>
       `<div class="cal-head${i === 5 ? " cal-head--sat" : i === 6 ? " cal-head--sun" : ""}">${d}</div>`
@@ -244,8 +243,8 @@ function renderCalendar() {
 
     const emptyCells = Array(firstDow).fill('<div class="cal-cell cal-cell--empty"></div>').join("");
 
-    const dayCells = Array.from({ length: lastDate }, (_, i) => {
-      const d = i + 1;
+    const dayCells = Array.from({ length: endDay - startDay + 1 }, (_, i) => {
+      const d = startDay + i;
       const dow = (firstDow + i) % 7;
       const mm = String(month + 1).padStart(2, "0");
       const dd = String(d).padStart(2, "0");
