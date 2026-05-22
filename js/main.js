@@ -235,11 +235,11 @@ function renderCalendar() {
   const monthsEl = document.createElement("div");
   container.appendChild(monthsEl);
   monthsEl.innerHTML = MONTHS.map(({ year, month, label }) => {
-    const firstDow = new Date(year, month, 1).getDay();
+    const firstDow = (new Date(year, month, 1).getDay() + 6) % 7;
     const lastDate = new Date(year, month + 1, 0).getDate();
 
-    const headers = ["日", "月", "火", "水", "木", "金", "土"].map((d, i) =>
-      `<div class="cal-head${i === 0 ? " cal-head--sun" : i === 6 ? " cal-head--sat" : ""}">${d}</div>`
+    const headers = ["月", "火", "水", "木", "金", "土", "日"].map((d, i) =>
+      `<div class="cal-head${i === 5 ? " cal-head--sat" : i === 6 ? " cal-head--sun" : ""}">${d}</div>`
     ).join("");
 
     const emptyCells = Array(firstDow).fill('<div class="cal-cell cal-cell--empty"></div>').join("");
@@ -255,7 +255,7 @@ function renderCalendar() {
         .filter(m => m.date === dateStr)
         .sort((a, b) => a.time.localeCompare(b.time));
 
-      const dateNumClass = `cal-date${dow === 0 ? " cal-date--sun" : dow === 6 ? " cal-date--sat" : ""}`;
+      const dateNumClass = `cal-date${dow === 6 ? " cal-date--sun" : dow === 5 ? " cal-date--sat" : ""}`;
       const cellClass = `cal-cell${!inTournament ? " cal-cell--inactive" : dayMatches.length > 0 ? " cal-cell--match" : " cal-cell--active"}`;
 
       const knockoutStage = dayMatches.length > 0 && !dayMatches[0].group ? dayMatches[0].stage : null;
