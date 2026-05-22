@@ -643,7 +643,7 @@ body {
   /* Header */
   .header { padding: 18px 14px 14px; }
   .header-sub { font-size: 0.9rem; letter-spacing: 0.02em; }
-  .header-title { font-size: clamp(1.1rem, 5vw, 1.6rem); }
+  .header-title { font-size: clamp(1rem, 4.5vw, 1.6rem); white-space: nowrap; }
   .header-trophy { font-size: 2rem; }
   .header-ball { font-size: 1.3rem; }
   .header-row { gap: 10px; }
