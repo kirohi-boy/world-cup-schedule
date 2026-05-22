@@ -233,6 +233,7 @@ function renderCalendar() {
   container.innerHTML = legend;
 
   const monthsEl = document.createElement("div");
+  monthsEl.className = "cal-months-wrapper";
   container.appendChild(monthsEl);
   monthsEl.innerHTML = MONTHS.map(({ year, month, label, startDay, endDay }) => {
     const firstDow = (new Date(year, month, startDay).getDay() + 6) % 7;
