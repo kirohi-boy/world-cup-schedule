@@ -373,6 +373,16 @@ body {
   line-height: 1.1;
 }
 
+.team-rank {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--navy);
+  background: rgba(0,61,165,0.08);
+  padding: 2px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.03em;
+}
+
 .team-notable {
   font-size: 0.7rem;
   color: var(--text-sub);

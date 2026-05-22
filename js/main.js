@@ -43,6 +43,21 @@ const CLUBS = {
   "イングランド": "レアル・マドリード", "クロアチア": "レアル・マドリード", "ガーナ": "ウェストハム", "パナマ": "DCユナイテッド"
 };
 
+const FIFA_RANKINGS = {
+  "メキシコ": 15, "南アフリカ": 60, "韓国": 25, "チェコ": 41,
+  "カナダ": 30, "ボスニア・ヘルツェゴビナ": 65, "カタール": 55, "スイス": 19,
+  "ブラジル": 6, "モロッコ": 8, "ハイチ": 83, "スコットランド": 43,
+  "アメリカ": 16, "パラグアイ": 40, "オーストラリア": 27, "トルコ": 22,
+  "ドイツ": 10, "キュラソー": 82, "コートジボワール": 34, "エクアドル": 23,
+  "オランダ": 7, "日本": 18, "スウェーデン": 38, "チュニジア": 44,
+  "ベルギー": 9, "エジプト": 29, "イラン": 21, "ニュージーランド": 85,
+  "スペイン": 2, "カーボベルデ": 69, "サウジアラビア": 61, "ウルグアイ": 17,
+  "フランス": 1, "セネガル": 14, "イラク": 57, "ノルウェー": 31,
+  "アルゼンチン": 3, "アルジェリア": 28, "オーストリア": 24, "ヨルダン": 63,
+  "ポルトガル": 5, "コンゴ民主共和国": 46, "ウズベキスタン": 50, "コロンビア": 13,
+  "イングランド": 4, "クロアチア": 11, "ガーナ": 74, "パナマ": 33
+};
+
 const CITY_COUNTRY = {
   "メキシコシティ": "メキシコ", "グアダラハラ": "メキシコ", "モンテレイ": "メキシコ",
   "トロント": "カナダ", "バンクーバー": "カナダ",
@@ -148,6 +163,8 @@ function renderMatches(dateStr) {
     const awayNotable = NOTABLE_PLAYERS[match.away] || "";
     const homeClub    = CLUBS[match.home] || "";
     const awayClub    = CLUBS[match.away] || "";
+    const homeRank    = FIFA_RANKINGS[match.home];
+    const awayRank    = FIFA_RANKINGS[match.away];
 
     const groupLabel = match.group
       ? `<span class="match-group-label">Group ${match.group} MD${match.matchday}</span>`
@@ -166,12 +183,14 @@ function renderMatches(dateStr) {
         <div class="team">
           <span class="team-flag">${homeFlag}</span>
           <span class="team-name">${match.home}</span>
+          ${homeRank ? `<span class="team-rank">FIFAランク ${homeRank}位</span>` : ""}
           ${homeNotable ? `<span class="team-notable">注目選手：${homeNotable}${homeClub ? `（${homeClub}）` : ""}</span>` : ""}
         </div>
         <span class="vs-separator">VS</span>
         <div class="team">
           <span class="team-flag">${awayFlag}</span>
           <span class="team-name">${match.away}</span>
+          ${awayRank ? `<span class="team-rank">FIFAランク ${awayRank}位</span>` : ""}
           ${awayNotable ? `<span class="team-notable">注目選手：${awayNotable}${awayClub ? `（${awayClub}）` : ""}</span>` : ""}
         </div>
       </div>
