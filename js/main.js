@@ -263,12 +263,13 @@ function renderCalendar() {
         ? `<span class="cal-stage-label ${STAGE_CLASS[knockoutStage]}">${knockoutStage}</span>`
         : "";
 
-      const matchesHtml = dayMatches.map(m =>
-        `<div class="cal-match ${m.group ? `g-${m.group}` : STAGE_CLASS[m.stage] || "s-group"}">
+      const matchesHtml = dayMatches.map(m => {
+        const isJapan = m.home === "日本" || m.away === "日本";
+        return `<div class="cal-match ${m.group ? `g-${m.group}` : STAGE_CLASS[m.stage] || "s-group"}${isJapan ? " cal-match--japan" : ""}">
           <span class="cal-time">${m.time}</span>
-          <span class="cal-teams">${m.home} vs ${m.away}${m.group ? ` (${m.group})` : ""}</span>
-        </div>`
-      ).join("");
+          <span class="cal-teams">${isJapan ? "🇯🇵 " : ""}${m.home} vs ${m.away}${m.group ? ` (${m.group})` : ""}</span>
+        </div>`;
+      }).join("");
 
       return `<div class="${cellClass}" data-date="${inTournament && dayMatches.length > 0 ? dateStr : ""}">
         <div class="cal-date-row">

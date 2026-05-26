@@ -625,6 +625,22 @@ body {
 .g-K { background: #0369A1; }
 .g-L { background: #0D9488; }
 
+/* Japan match highlight */
+.cal-match--japan {
+  background: #fff !important;
+  color: #0A0A0A !important;
+  border: 2px solid #BC002D;
+  box-shadow: 0 0 0 1px #BC002D, inset 0 0 0 1px rgba(188,0,45,0.12);
+  font-weight: 800;
+}
+.cal-match--japan .cal-time {
+  color: #BC002D;
+}
+.cal-match--japan .cal-teams {
+  opacity: 1;
+  color: #0A0A0A;
+}
+
 /* Knockout stage colors */
 .s-r32   { background: var(--stage-r32); }
 .s-r16   { background: var(--stage-r16); }
