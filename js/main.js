@@ -289,6 +289,7 @@ function renderCalendar() {
   container.addEventListener("click", e => {
     const cell = e.target.closest("[data-date]");
     if (cell && cell.dataset.date) {
+      history.pushState({ view: "day", date: cell.dataset.date }, "");
       switchView("day");
       renderMatches(cell.dataset.date);
     }
@@ -329,6 +330,16 @@ async function init() {
 
   renderCalendar();
   renderMatches(getInitialDate());
+  history.replaceState({ view: "calendar" }, "");
+
+  window.addEventListener("popstate", e => {
+    if (e.state?.view === "day") {
+      switchView("day");
+      renderMatches(e.state.date);
+    } else {
+      switchView("calendar");
+    }
+  });
 
   document.getElementById("calBtn").addEventListener("click", () => switchView("calendar"));
   document.getElementById("dayBtn").addEventListener("click", () => switchView("day"));
