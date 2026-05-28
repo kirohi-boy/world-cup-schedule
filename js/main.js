@@ -177,7 +177,7 @@ function renderMatches(dateStr) {
     const awayRank    = FIFA_RANKINGS[match.away];
 
     const groupLabel = match.group
-      ? `<span class="match-group-label">Group ${match.group} MD${match.matchday}</span>`
+      ? `<span class="match-group-label">Group ${match.group} 第${match.matchday}戦</span>`
       : "";
 
     card.innerHTML = `
